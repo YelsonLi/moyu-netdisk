@@ -1,0 +1,62 @@
+server:
+  port: 8082
+#  静态资源
+#spring:
+#  mvc:
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    druid:
+      filter:
+        stat:
+          slow-sql-millis: 1000
+          log-slow-sql: true
+          enabled: true
+        wall:
+          enabled: true
+          config:
+            drop-table-allow: false
+      filters: stat,wall,slf4j
+      stat-view-servlet:
+        enabled: true
+        login-username: showmeyourcode
+        login-password: 1024
+        # 重置按钮
+        reset-enable: false
+
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      aop-patterns: com.join.springbootquickstart.*
+
+    username: rootxxx
+    password: xxx
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/xxx?autoReconnect=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  #    type: com.zaxxer.hikari.HikariDataSource（Example）
+  jdbc:
+    template:
+      query-timeout: 3
+#    static-path-pattern:
+#  redis:
+#    url: 127.0.0.1
+#    port: 6379
+#    client-type: lettuce
+#    lettuce:
+#      pool:
+#        max-active: 8
+#        min-idle: 0
+
+#    username:
+#    password:
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: true
+    cache-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.join.springbootquickstarter.entity

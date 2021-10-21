@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moyu.moyunetdisk.dao.MyFileDao">
+
+    <resultMap type="com.moyu.moyunetdisk.entity.MyFile" id="MyFileMap">
+        <result property="myFileId" column="my_file_id" jdbcType="INTEGER"/>
+        <result property="myFileName" column="my_file_name" jdbcType="VARCHAR"/>
+        <result property="fileStoreId" column="file_store_id" jdbcType="INTEGER"/>
+        <result property="myFilePath" column="my_file_path" jdbcType="VARCHAR"/>
+        <result property="downloadTime" column="download_time" jdbcType="INTEGER"/>
+        <result property="uploadTime" column="upload_time" jdbcType="TIMESTAMP"/>
+        <result property="parentFolderId" column="parent_folder_id" jdbcType="INTEGER"/>
+        <result property="size" column="size" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="postfix" column="postfix" jdbcType="VARCHAR"/>
+    </resultMap>
+
+</mapper>
+
