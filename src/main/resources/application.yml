@@ -1,9 +1,24 @@
 server:
   port: 8082
+  servlet:
+    context-path: /moyu
+  tomcat:
+    uri-encoding: UTF-8
 #  静态资源
 #spring:
 #  mvc:
 spring:
+  mvc:
+    static-path-pattern: /**
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  thymeleaf:
+    mode: HTML
+    cache: false
+    servlet:
+      content-type: text/html
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -32,10 +47,10 @@ spring:
         exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
       aop-patterns: com.join.springbootquickstart.*
 
-    username: rootxxx
-    password: xxx
+    username: yelsonli00122
+    password: YelsonLi00122!
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/xxx?autoReconnect=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://www.yelson.top:3306/db_moyunetdisk?autoReconnect=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
   #    type: com.zaxxer.hikari.HikariDataSource（Example）
   jdbc:
     template:

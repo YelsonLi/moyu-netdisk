@@ -21,7 +21,7 @@ import java.util.Objects;
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        //ture:拦截，false:放行
+        // ture:拦截，false:放行
         // 标注了@CosmoController，且类及方法上都没有标注@IgnoreCosmoResult的方法才进行包装
         return methodParameter.getDeclaringClass().isAnnotationPresent(CosmoController.class)
                 && !methodParameter.getDeclaringClass().isAnnotationPresent(IgnoreCosmoResult.class)
@@ -53,6 +53,5 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
         return ResultVO.success(o);
     }
-
 
 }

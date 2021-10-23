@@ -28,6 +28,8 @@ public class NetDiskInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
+
+
         // true则放行
         // 不拦截跨域相关请求
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
@@ -39,7 +41,7 @@ public class NetDiskInterceptor implements HandlerInterceptor {
         }
 
         // 登录成功把用户信息存入NetDiskContext
-        User userInfo = handleLogin(request,response);
+        User userInfo = handleLogin(request, response);
         NetDiskContext.put(WebConstant.CURRENT_USER_IN_SESSION, userInfo);
 
         return true;

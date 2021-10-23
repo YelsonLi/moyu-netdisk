@@ -2,3 +2,32 @@
 2    DEBUG [2021-10-21 19:20:25]  TemplateLoader.findTemplateSource("login/user_zh_CN.ftlh"): Not found
 3    DEBUG [2021-10-21 19:20:25]  TemplateLoader.findTemplateSource("login/user_zh.ftlh"): Not found
 3    DEBUG [2021-10-21 19:20:25]  TemplateLoader.findTemplateSource("login/user.ftlh"): Not found
+0    DEBUG [2021-10-22 15:38:36]  Couldn't find template in cache for "error/500.ftlh"("zh", UTF-8, parsed); will try to load it.
+2    DEBUG [2021-10-22 15:38:36]  TemplateLoader.findTemplateSource("error/500_zh.ftlh"): Not found
+3    DEBUG [2021-10-22 15:38:36]  TemplateLoader.findTemplateSource("error/500.ftlh"): Not found
+124  DEBUG [2021-10-22 15:38:36]  "error/500.ftlh"("zh", UTF-8, parsed) cached copy not yet stale; using cached.
+282149 DEBUG [2021-10-22 15:43:18]  Couldn't find template in cache for "index.ftlh"("zh", UTF-8, parsed); will try to load it.
+282150 DEBUG [2021-10-22 15:43:18]  TemplateLoader.findTemplateSource("index_zh.ftlh"): Not found
+282151 DEBUG [2021-10-22 15:43:18]  TemplateLoader.findTemplateSource("index.ftlh"): Not found
+282155 DEBUG [2021-10-22 15:43:18]  TemplateLoader.findTemplateSource("error/500_zh.ftlh"): Not found
+282155 DEBUG [2021-10-22 15:43:18]  TemplateLoader.findTemplateSource("error/500.ftlh"): Not found
+282155 DEBUG [2021-10-22 15:43:18]  "error/500.ftlh"("zh", UTF-8, parsed) no source found.
+0    DEBUG [2021-10-22 15:50:03]  Couldn't find template in cache for "error/404.ftlh"("zh", UTF-8, parsed); will try to load it.
+2    DEBUG [2021-10-22 15:50:03]  TemplateLoader.findTemplateSource("error/404_zh.ftlh"): Not found
+3    DEBUG [2021-10-22 15:50:03]  TemplateLoader.findTemplateSource("error/404.ftlh"): Not found
+0    DEBUG [2021-10-22 18:27:06]  Couldn't find template in cache for "error.ftlh"("zh", UTF-8, parsed); will try to load it.
+2    DEBUG [2021-10-22 18:27:07]  TemplateLoader.findTemplateSource("error_zh.ftlh"): Not found
+2    DEBUG [2021-10-22 18:27:07]  TemplateLoader.findTemplateSource("error.ftlh"): Not found
+27549 DEBUG [2021-10-22 18:27:34]  Couldn't find template in cache for "index.ftlh"("zh", UTF-8, parsed); will try to load it.
+27550 DEBUG [2021-10-22 18:27:34]  TemplateLoader.findTemplateSource("index_zh.ftlh"): Not found
+27551 DEBUG [2021-10-22 18:27:34]  TemplateLoader.findTemplateSource("index.ftlh"): Not found
+44977 DEBUG [2021-10-22 18:27:51]  TemplateLoader.findTemplateSource("error_zh.ftlh"): Not found
+44977 DEBUG [2021-10-22 18:27:51]  TemplateLoader.findTemplateSource("error.ftlh"): Not found
+44977 DEBUG [2021-10-22 18:27:51]  "error.ftlh"("zh", UTF-8, parsed) no source found.
+62736 DEBUG [2021-10-22 18:28:09]  TemplateLoader.findTemplateSource("error_zh.ftlh"): Not found
+62736 DEBUG [2021-10-22 18:28:09]  TemplateLoader.findTemplateSource("error.ftlh"): Not found
+62736 DEBUG [2021-10-22 18:28:09]  "error.ftlh"("zh", UTF-8, parsed) no source found.
+78352 DEBUG [2021-10-22 18:28:25]  TemplateLoader.findTemplateSource("error_zh.ftlh"): Not found
+78352 DEBUG [2021-10-22 18:28:25]  TemplateLoader.findTemplateSource("error.ftlh"): Not found
+78352 DEBUG [2021-10-22 18:28:25]  "error.ftlh"("zh", UTF-8, parsed) no source found.
+83181 DEBUG [2021-10-22 18:28:30]  "error.ftlh"("zh", UTF-8, parsed) cached copy not yet stale; using cached.
