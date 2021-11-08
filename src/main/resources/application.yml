@@ -1,7 +1,7 @@
 server:
   port: 8082
   servlet:
-    context-path: /moyu
+    context-path: /
   tomcat:
     uri-encoding: UTF-8
 #  静态资源

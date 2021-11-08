@@ -1,6 +1,7 @@
 package com.moyu.moyunetdisk.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,9 +14,9 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class MailUtils {
 
-    //邮件发送器
     private JavaMailSenderImpl mailSender;
 
+    @Autowired
     public MailUtils(JavaMailSenderImpl mailSender){
         this.mailSender = mailSender;
     }
