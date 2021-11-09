@@ -14,7 +14,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
-    public User login (String currentUsername, String currentPassword);
+    public User login (String currentEmail, String currentPassword);
 
     public boolean register(User user);
+
+    /**
+     * @Description  通过openID查询单条数据
+     * @Author xw
+     * @Date 18:29 2020/2/25
+     * @Param [userId]
+     * @return com.moti.entity.User
+     **/
+    User getUserByOpenId(String openId);
 }

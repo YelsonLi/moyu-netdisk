@@ -7,8 +7,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
@@ -25,7 +24,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @since 2021-10-20 18:54:18
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("t_user")
+@Builder
 public class User implements Serializable {
     private static final long serialVersionUID = -21850424224017203L;
     /**

@@ -1,5 +1,8 @@
 package com.moyu.moyunetdisk.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.moyu.moyunetdisk.entity.FileFolder;
+import com.moyu.moyunetdisk.entity.FileStoreStatistics;
 import com.moyu.moyunetdisk.entity.MyFile;
 import com.moyu.moyunetdisk.mapper.FileFolderMapper;
 import com.moyu.moyunetdisk.mapper.FileStoreMapper;
@@ -36,5 +39,12 @@ public class MyFileServiceImpl extends ServiceImpl<MyFileMapper, MyFile> impleme
         this.myFileMapper = myFileMapper;
         this.fileFolderMapper = fileFolderMapper;
         this.fileStoreMapper = fileStoreMapper;
+    }
+
+    @Override
+    public FileStoreStatistics getCountStatistics(Integer id) {
+        FileStoreStatistics statistics = myFileMapper.getCountStatistics(id);
+        statistics.setFolderCount(fileFolderMapper.getFileFolderCountByFileStoreId(id));
+        return statistics;
     }
 }

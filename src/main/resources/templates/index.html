@@ -31,6 +31,7 @@
                     <a title="QQ登录免注册" th:href="@{/loginByQQ}" class="badge btn-success"><i class="fab fa-qq"></i></a>
                     <a title="上传临时文件" class="badge btn-upload js-btn btn-success" data-target="upload"><i class="fa fa-upload" aria-hidden="true"></i></a>
                 </p>
+                <div><p><a href="http://beian.miit.gov.cn/">皖ICP备2021015564号</a></p></div>
             </div>
         </div>
         <div class="card border-0 shadow card--register" id="register">
@@ -38,7 +39,7 @@
                 <h2 class="card-title">用户注册</h2>
                 <p/>
                 <p/>
-                <form method="post" action="register">
+                <form method="post" action="user/register">
                     <div class="form-group">
                         <label>
                             <input class="form-control userName" type="text" placeholder="用户名" required="required"
@@ -79,7 +80,7 @@
             <div class="card-body">
                 <h2 class="card-title">用户登录</h2>
                 <br><br>
-                <form method="post" action="login">
+                <form method="post" action="user/login">
                     <div class="form-group">
                         <label>
                             <input class="form-control" type="email" th:placeholder="邮箱" name="email"
@@ -119,6 +120,7 @@
             <button class="btn btn-back js-btn" data-target="welcome"><i class="fas fa-angle-left"></i></button>
         </div>
     </div>
+
 </div>
 <script src="js/jquery-3.4.1.js"></script>
 <script src="js/login.js"></script>
@@ -169,7 +171,7 @@
         var email = $(".email").val();
         $.ajax({
             type: "GET",
-            url: "sendCode",
+            url: "user/sendCode",
             async: false,
             contentType: "application/json; charset=utf-8",
             dataType: "text",

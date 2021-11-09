@@ -14,6 +14,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-10-20 15:10:45
  */
 public interface FileFolderMapper extends BaseMapper<FileFolder> {
-
+    /**
+     * @Description 获得仓库的文件夹数量
+     * @Author xw
+     * @Date 21:56 2020/2/10
+     * @Param [fileStoreId]
+     * @return java.lang.Integer
+     **/
+    Integer getFileFolderCountByFileStoreId(Integer fileStoreId);
 }
 

@@ -8,6 +8,25 @@ server:
 #spring:
 #  mvc:
 spring:
+  mail:
+    host: smtp.163.com
+    username: yelsonli00122@163.com
+    password: WKWTKZFIRDHEPFJC
+    port: 465
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.ssl.enable: true
+#  mail:
+#    host: smtp.163.com
+#    username: join_studio@163.com
+#    password: GOTTVTZCNCHYYUFS
+#    port: 465
+#    protocol: smtp
+#    default-encoding: UTF-8
+#    properties:
+#      mail.smtp.ssl.enable: true
+
   mvc:
     static-path-pattern: /**
   servlet:
@@ -19,6 +38,9 @@ spring:
     cache: false
     servlet:
       content-type: text/html
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -74,4 +96,4 @@ mybatis-plus:
     lazy-loading-enabled: true
     cache-enabled: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.join.springbootquickstarter.entity
+  type-aliases-package: com.moyu.moyunetdisk.entity

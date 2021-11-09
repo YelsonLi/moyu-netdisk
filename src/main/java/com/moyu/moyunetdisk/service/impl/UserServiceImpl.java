@@ -46,9 +46,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User login(String currentUsername, String currentPassword) {
+    public User login(String currentEmail, String currentPassword) {
         User currentUser = userMapper.selectOne(Wrappers.lambdaQuery(User.class)
-                .eq(User::getUserName, currentUsername)
+                .eq(User::getEmail, currentEmail)
                 .eq(User::getPassword, currentPassword));
         if (Objects.isNull(currentUser)) {
             log.info("用户名或密码错误");
@@ -60,5 +60,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public boolean register(User user) {
         return false;
+    }
+
+    @Override
+    public User getUserByOpenId(String openId) {
+        return userMapper.selectOne(Wrappers.lambdaQuery(User.class).eq(User::getOpenId, openId));
     }
 }
