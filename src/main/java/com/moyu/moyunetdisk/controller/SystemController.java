@@ -3,6 +3,7 @@ package com.moyu.moyunetdisk.controller;/*
  *    @Description: 系统页面跳转控制器
  */
 
+import com.moyu.moyunetdisk.def.LoginRequired;
 import com.moyu.moyunetdisk.entity.FileStoreStatistics;
 import com.moyu.moyunetdisk.service.FileFolderService;
 import com.moyu.moyunetdisk.service.FileStoreService;
@@ -24,6 +25,7 @@ import java.util.Map;
 @RequestMapping("/system")
 public class SystemController extends BaseController {
 
+    @LoginRequired
     @GetMapping("/index")
     public String index(Map<String, Object> map) {
         //获得统计信息

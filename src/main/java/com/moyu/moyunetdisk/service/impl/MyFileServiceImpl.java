@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * (MyFile)表服务实现类
@@ -44,6 +45,21 @@ public class MyFileServiceImpl extends ServiceImpl<MyFileMapper, MyFile> impleme
     @Override
     public FileStoreStatistics getCountStatistics(Integer id) {
         FileStoreStatistics statistics = myFileMapper.getCountStatistics(id);
+        if (Objects.isNull(statistics.getDoc())) {
+            statistics.setDoc(0);
+        }
+        if (Objects.isNull(statistics.getImage())) {
+            statistics.setImage(0);
+        }
+        if (Objects.isNull(statistics.getMusic())) {
+            statistics.setMusic(0);
+        }
+        if (Objects.isNull(statistics.getVideo())) {
+            statistics.setVideo(0);
+        }
+        if (Objects.isNull(statistics.getOther())) {
+            statistics.setOther(0);
+        }
         statistics.setFolderCount(fileFolderMapper.getFileFolderCountByFileStoreId(id));
         return statistics;
     }

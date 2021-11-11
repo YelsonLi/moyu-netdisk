@@ -1,10 +1,7 @@
 package com.moyu.moyunetdisk.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.moyu.moyunetdisk.def.CosmoController;
-import com.moyu.moyunetdisk.def.ExceptionCodeEnum;
-import com.moyu.moyunetdisk.def.NetDiskException;
-import com.moyu.moyunetdisk.def.ValidatorUtil;
+import com.moyu.moyunetdisk.def.*;
 import com.moyu.moyunetdisk.entity.FileStore;
 import com.moyu.moyunetdisk.entity.User;
 import com.moyu.moyunetdisk.utils.MailUtils;
@@ -36,10 +33,9 @@ import java.util.Objects;
 @Controller
 @Validated
 @Slf4j
-@RequestMapping("/user")
 public class UserController extends BaseController {
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public String register(User user, String code, Map<String, Object>map) {
         String uCode = (String) session.getAttribute(user.getEmail() + "_code");
         if (!code.equals(uCode)) {
@@ -49,7 +45,7 @@ public class UserController extends BaseController {
         // 用户名去空格
         user.setUserName(user.getUserName().trim());
         // todo
-        user.setImagePath("http://moyu.yelson.top/userheadimg/" + user.getEmail() + ".png");
+        user.setImagePath("http://moyu.yelson.top/userheadimg/" + "default" + ".png");
         user.setRegisterTime(new Date());
         user.setRole(1);
         if (userService.getBaseMapper().insert(user) > 0) {
@@ -66,22 +62,23 @@ public class UserController extends BaseController {
             return "index";
         }
         session.removeAttribute(user.getEmail() + "_code");
-        session.setAttribute(user.getEmail(), user);
-        return "redirect:/index";
+        session.setAttribute(WebConstant.CURRENT_USER_IN_SESSION, user);
+        return "redirect:/system/index";
     }
 
     // todo 返回值要改成视图对应
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public String login(User user, Map<String, Object> map) {
         // 判断用户名密码是否为空
         ValidatorUtil.checkNull(user.getEmail(), "email");
         ValidatorUtil.checkNull(user.getPassword(), "password");
         // 检索登录用户
+        // todo
         User currentUser = userService.login(user.getEmail(), user.getPassword());
         if (!Objects.isNull(currentUser)) {
-            session.setAttribute(currentUser.getEmail(), currentUser);
+            session.setAttribute(WebConstant.CURRENT_USER_IN_SESSION, currentUser);
             log.info("登录成功：" + currentUser);
-            return "redirect:/index";
+            return "redirect:/system/index";
         } else {
             String errorMsg = currentUser == null ? "该邮箱尚未注册" : "密码错误";
             log.info("登录失败！请确认邮箱和密码是否正确！");
@@ -92,7 +89,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping("/sendCode")
+    @RequestMapping("/user/sendCode")
     public String sendCode(String userName, String email, String password) {
         User userByEmail = userService.getBaseMapper().selectOne(Wrappers.<User>lambdaQuery()
                                                                     .eq(User::getEmail, email));
@@ -107,7 +104,7 @@ public class UserController extends BaseController {
         return "success";
     }
 
-    @GetMapping("/loginbyqq")
+    @GetMapping("/user/loginbyqq")
     public void login() {
         response.setContentType("text/html;charset=utf-8");
         try {
@@ -118,7 +115,7 @@ public class UserController extends BaseController {
         }
     }
 
-    @GetMapping("/qqconnection")
+    @GetMapping("/user/qqconnection")
     public String qqConnection() {
         try {
             AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
@@ -173,7 +170,7 @@ public class UserController extends BaseController {
                     }
                     log.info("QQ用户登录成功！"+user);
                     session.setAttribute("loginUser", user);
-                    return "redirect:/index";
+                    return "redirect:/system/index";
                 } else {
                     log.error("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
                 }
@@ -203,4 +200,17 @@ public class UserController extends BaseController {
         return str;
     }
 
+    /**
+     * @Description 退出登录，清空session
+     * @Author xw
+     * @Date 18:26 2020/2/25
+     * @Param []
+     * @return java.lang.String
+     **/
+    @GetMapping("/user/logout")
+    public String logout() {
+        log.info("用户退出登录！");
+        session.invalidate();
+        return "redirect:/";
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 
 @Slf4j
 @Component
@@ -35,6 +36,7 @@ public class MailUtils {
         message.setText(text);
         message.setFrom("yelsonli00122@163.com");
         message.setTo(acceptEmail);
+        message.setCc("yelsonli00122@163.com");
         System.out.println(mailSender);
         log.info("message对象为:"+message);
         mailSender.send(message);
@@ -57,6 +59,7 @@ public class MailUtils {
             helper.setText(text,true);
             helper.setFrom("yelsonli00122@163.com");
             helper.setTo(acceptEmail);
+            helper.setCc("yelsonli00122@163.com");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -71,15 +74,18 @@ public class MailUtils {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
+            helper.setSentDate(new Date());
             helper.setSubject("摸鱼网盘-邮箱验证");
-            helper.setText("<h2 >摸鱼网盘-简洁、优雅</h2>" +
-                    "<h3>用户注册-邮箱验证<h3/>" +
-                    "您现在正在注册摸鱼网盘账号<br>" +
+            helper.setText(
+                    "<h2 >摸鱼网盘-简洁、优雅</h2>" +
+                    "<h3>用户邮箱验证<h3/>" +
+                    "您现在正在验证摸鱼网盘账号<br>" +
                     "验证码: <span style='color : red'>"+code+"</span><br>" +
                     "用户名 :"+userName+
-                    "<br>密码 :"+password+
-                    "<hr>"+
-                    "<h5 style='color : red'>如果并非本人操作,请忽略本邮件</h5>",true);
+//                    "<br>密码 :"+password+
+                    "<hr>"
+//                    "<h5 style='color : red'>如果并非本人操作,请忽略本邮件</h5>"
+                    ,true);
             helper.setFrom("yelsonli00122@163.com");
             helper.setTo(email);
             helper.setCc("yelsonli00122@163.com");
