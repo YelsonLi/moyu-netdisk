@@ -45,7 +45,7 @@ public class UserController extends BaseController {
         // 用户名去空格
         user.setUserName(user.getUserName().trim());
         // todo
-        user.setImagePath("http://moyu.yelson.top/userheadimg/" + "default" + ".png");
+        user.setImagePath("http://www.yelson.top:8082/userheadimg/" + "default" + ".png");
         user.setRegisterTime(new Date());
         user.setRole(1);
         if (userService.getBaseMapper().insert(user) > 0) {
@@ -147,6 +147,7 @@ public class UserController extends BaseController {
                                 .openId(openID).userName(removeNonBmpUnicode(userInfoBean.getNickname()))
                                 .imagePath(userInfoBean.getAvatar().getAvatarURL100()).
                                         registerTime(new Date()).build();
+
                         if (userService.getBaseMapper().insert(user) > 0){
                             log.info("注册用户成功！当前注册用户" + user);
                             FileStore store = FileStore.builder().userId(user.getUserId()).build();
