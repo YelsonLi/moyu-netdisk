@@ -1,5 +1,6 @@
 package com.moyu.moyunetdisk.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyu.moyunetdisk.entity.FileStore;
 import com.moyu.moyunetdisk.mapper.FileFolderMapper;
 import com.moyu.moyunetdisk.mapper.FileStoreMapper;
@@ -36,5 +37,23 @@ public class FileStoreServiceImpl extends ServiceImpl<FileStoreMapper, FileStore
         this.myFileMapper = myFileMapper;
         this.fileFolderMapper = fileFolderMapper;
         this.fileStoreMapper = fileStoreMapper;
+    }
+
+    @Override
+    public Integer addFileStore(FileStore fileStore) {
+        return fileStoreMapper.addFileStore(fileStore);
+    }
+
+    /**
+     * @Description 根据文件仓库id获得文件仓库
+     * @Author xw
+     * @Date 22:01 2020/1/26
+     * @Param [fileStoreId]
+     * @return com.molihub.entity.FileStore
+     **/
+    @Override
+    public FileStore getFileStoreById(Integer fileStoreId) {
+        return fileStoreMapper.selectOne(Wrappers.lambdaQuery(FileStore.class)
+        .eq(FileStore::getFileStoreId, fileStoreId));
     }
 }

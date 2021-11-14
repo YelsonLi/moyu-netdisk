@@ -48,4 +48,5 @@
             timeToIdleSeconds="1800"
             timeToLiveSeconds="1800"
             memoryStoreEvictionPolicy="LRU"/>
+</ehcache>
 

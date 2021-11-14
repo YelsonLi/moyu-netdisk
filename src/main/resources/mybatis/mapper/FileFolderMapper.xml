@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.moyu.moyunetdisk.dao.FileFolderDao">
+<mapper namespace="com.moyu.moyunetdisk.mapper.FileFolderMapper">
 
     <resultMap type="com.moyu.moyunetdisk.entity.FileFolder" id="FileFolderMap">
         <result property="fileFolderId" column="file_folder_id" jdbcType="INTEGER"/>
@@ -10,4 +10,7 @@
         <result property="time" column="time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="getFileFolderCountByFileStoreId" resultType="java.lang.Integer">
+        select count(*) from t_file_folder where file_store_id = #{id}
+    </select>
 </mapper>

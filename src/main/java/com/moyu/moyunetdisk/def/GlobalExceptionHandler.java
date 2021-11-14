@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     //业务异常
     @ExceptionHandler(NetDiskException.class)
     @ResponseStatus(code = HttpStatus.OK)
-    public ResultVO<ExceptionCodeEnum> joinOAuthExceptionHandler(NetDiskException netDiskException) {
+    public ResultVO<ExceptionCodeEnum> netDiskExceptionHandler(NetDiskException netDiskException) {
         log.error("业务异常：{}", netDiskException.getCodeEnum().getDesc(), netDiskException.getCodeEnum());
         return ResultVO.error(netDiskException.getCodeEnum());
     }

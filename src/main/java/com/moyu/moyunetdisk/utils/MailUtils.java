@@ -1,6 +1,7 @@
 package com.moyu.moyunetdisk.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -8,14 +9,15 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 
 @Slf4j
 @Component
 public class MailUtils {
 
-    //邮件发送器
     private JavaMailSenderImpl mailSender;
 
+    @Autowired
     public MailUtils(JavaMailSenderImpl mailSender){
         this.mailSender = mailSender;
     }
@@ -32,8 +34,9 @@ public class MailUtils {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject(title);
         message.setText(text);
-        message.setFrom("你需要修改此处为你的QQ邮箱");
+        message.setFrom("yelsonli00122@163.com");
         message.setTo(acceptEmail);
+        message.setCc("yelsonli00122@163.com");
         System.out.println(mailSender);
         log.info("message对象为:"+message);
         mailSender.send(message);
@@ -54,8 +57,9 @@ public class MailUtils {
         try {
             helper.setSubject(title);
             helper.setText(text,true);
-            helper.setFrom("你需要修改此处为你的QQ邮箱");
+            helper.setFrom("yelsonli00122@163.com");
             helper.setTo(acceptEmail);
+            helper.setCc("yelsonli00122@163.com");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -70,17 +74,21 @@ public class MailUtils {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
-            helper.setSubject("莫提网盘-邮箱验证");
-            helper.setText("<h2 >莫提网盘-简洁、优雅、免费</h2>" +
-                    "<h3>用户注册-邮箱验证<h3/>" +
-                    "您现在正在注册莫提网盘账号<br>" +
+            helper.setSentDate(new Date());
+            helper.setSubject("摸鱼网盘-邮箱验证");
+            helper.setText(
+                    "<h2 >摸鱼网盘-简洁、优雅</h2>" +
+                    "<h3>用户邮箱验证<h3/>" +
+                    "您现在正在验证摸鱼网盘账号<br>" +
                     "验证码: <span style='color : red'>"+code+"</span><br>" +
                     "用户名 :"+userName+
-                    "<br>密码 :"+password+
-                    "<hr>"+
-                    "<h5 style='color : red'>如果并非本人操作,请忽略本邮件</h5>",true);
-            helper.setFrom("你需要修改此处为你的QQ邮箱");
+//                    "<br>密码 :"+password+
+                    "<hr>"
+//                    "<h5 style='color : red'>如果并非本人操作,请忽略本邮件</h5>"
+                    ,true);
+            helper.setFrom("yelsonli00122@163.com");
             helper.setTo(email);
+            helper.setCc("yelsonli00122@163.com");
         } catch (MessagingException e) {
             e.printStackTrace();
         }

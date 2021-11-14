@@ -1,9 +1,55 @@
 server:
   port: 8082
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
 #  静态资源
 #spring:
 #  mvc:
 spring:
+  mail:
+    host: smtp.163.com
+    username: yelsonli00122@163.com
+    password: WKWTKZFIRDHEPFJC
+    port: 465
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+#  mail:
+#    host: smtp.163.com
+#    username: join_studio@163.com
+#    password: GOTTVTZCNCHYYUFS
+#    port: 465
+#    protocol: smtp
+#    default-encoding: UTF-8
+#    properties:
+#      mail.smtp.ssl.enable: true
+
+  mvc:
+    static-path-pattern: /**
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  thymeleaf:
+    mode: HTML
+    cache: false
+    servlet:
+      content-type: text/html
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -32,10 +78,10 @@ spring:
         exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
       aop-patterns: com.join.springbootquickstart.*
 
-    username: rootxxx
-    password: xxx
+    username: yelsonli00122
+    password: YelsonLi00122!
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/xxx?autoReconnect=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://www.yelson.top:3306/db_moyunetdisk?autoReconnect=true&useSSL=false&characterEncoding=utf-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
   #    type: com.zaxxer.hikari.HikariDataSource（Example）
   jdbc:
     template:
@@ -59,4 +105,4 @@ mybatis-plus:
     lazy-loading-enabled: true
     cache-enabled: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.join.springbootquickstarter.entity
+  type-aliases-package: com.moyu.moyunetdisk.entity
