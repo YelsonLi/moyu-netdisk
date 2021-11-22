@@ -63,4 +63,44 @@ public class MyFileServiceImpl extends ServiceImpl<MyFileMapper, MyFile> impleme
         statistics.setFolderCount(fileFolderMapper.getFileFolderCountByFileStoreId(id));
         return statistics;
     }
+
+    @Override
+    public Integer deleteByFileId(Integer myFileId) {
+        return myFileMapper.deleteByFileId(myFileId);
+    }
+
+    @Override
+    public Integer deleteByParentFolderId(Integer id) {
+        return myFileMapper.deleteByParentFolderId(id);
+    }
+
+    @Override
+    public Integer addFileByFileStoreId(MyFile myFile) {
+        return myFileMapper.addFileByFileStoreId(myFile);
+    }
+
+    @Override
+    public Integer updateFile(MyFile myFile) {
+        return myFileMapper.updateFileByFileId(myFile);
+    }
+
+    @Override
+    public List<MyFile> getRootFilesByFileStoreId(Integer fileStoreId) {
+        return myFileMapper.getRootFilesByFileStoreId(fileStoreId);
+    }
+
+    @Override
+    public List<MyFile> getFilesByParentFolderId(Integer parentFolderId) {
+        return myFileMapper.getFilesByParentFolderId(parentFolderId);
+    }
+
+    @Override
+    public List<MyFile> getFilesByType(Integer storeId, Integer type) {
+        return myFileMapper.getFilesByType(storeId,type);
+    }
+
+    @Override
+    public MyFile getFileByFileId(Integer myFileId) {
+        return myFileMapper.getFileByFileId(myFileId);
+    }
 }

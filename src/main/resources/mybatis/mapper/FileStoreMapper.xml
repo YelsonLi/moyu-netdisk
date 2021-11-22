@@ -10,8 +10,37 @@
         <result property="permission" column="permission" jdbcType="INTEGER"/>
     </resultMap>
 
+    <sql id="commonsKey">
+        file_store_id,user_id,current_size,max_size,permission
+    </sql>
+
     <insert id="addFileStore" useGeneratedKeys="true" keyProperty="fileStoreId">
         insert into t_file_store(user_id) values (#{userId})
     </insert>
+
+    <select id="getFileStoreByUserId" resultType="com.moyu.moyunetdisk.entity.FileStore">
+        select <include refid="commonsKey"/> from t_file_store
+        <where>
+            user_id = #{userId}
+        </where>
+    </select>
+    <select id="getFileStoreById" resultType="com.moyu.moyunetdisk.entity.FileStore">
+        select <include refid="commonsKey"/> from t_file_store
+        <where>
+            file_store_id = #{fileStoreId}
+        </where>
+    </select>
+    <update id="addSize">
+        update t_file_store set current_size = current_size + #{size} where file_store_id = #{id}
+    </update>
+    <update id="subSize">
+        update t_file_store set current_size = current_size - #{size} where file_store_id = #{id}
+    </update>
+    <update id="updatePermission">
+        update t_file_store set permission = #{permission},max_size = #{size} where user_id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from t_file_store where file_store_id = #{id}
+    </delete>
 </mapper>
 

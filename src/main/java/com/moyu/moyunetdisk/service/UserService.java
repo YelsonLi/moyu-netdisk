@@ -5,6 +5,7 @@ import com.moyu.moyunetdisk.entity.User;
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.moyu.moyunetdisk.entity.UserToShow;
 
 /**
  * (User)表服务接口
@@ -26,4 +27,24 @@ public interface UserService extends IService<User> {
      * @return com.moti.entity.User
      **/
     User getUserByOpenId(String openId);
+
+    boolean insert(User user);
+
+    boolean deleteById(Integer userId);
+
+    User queryById(Integer userId);
+
+    User getUserByEmail(String email);
+
+    User queryByEmailAndPwd(String email, String password);
+
+    List<User> queryAll();
+
+    List<User> queryAll(User user);
+
+    boolean update(User user);
+
+    List<UserToShow> getUsers();
+
+    Integer getUsersCount();
 }

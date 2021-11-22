@@ -56,4 +56,51 @@ public class FileStoreServiceImpl extends ServiceImpl<FileStoreMapper, FileStore
         return fileStoreMapper.selectOne(Wrappers.lambdaQuery(FileStore.class)
         .eq(FileStore::getFileStoreId, fileStoreId));
     }
+
+    @Override
+    public FileStore getFileStoreByUserId(Integer userId) {
+        return fileStoreMapper.getFileStoreByUserId(userId);
+    }
+
+    @Override
+    public Integer addSize(Integer id, Integer size) {
+        return fileStoreMapper.addSize(id,size);
+    }
+
+    /**
+     * @Description 修改仓库当前已使用的容量
+     * @Author xw
+     * @Date 21:18 2020/2/10
+     * @Param [id,size]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer subSize(Integer id, Integer size) {
+        return fileStoreMapper.subSize(id,size);
+    }
+
+    /**
+     * @Description 更新仓库权限
+     * @Author xw
+     * @Date 16:29 2020/3/10
+     * @Param [id, permission]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer updatePermission(Integer id, Integer permission,Integer size){
+        return fileStoreMapper.updatePermission(id, permission, size);
+    }
+
+    /**
+     * @Description 通过主键删除仓库
+     * @Author xw
+     * @Date 20:32 2020/3/10
+     * @Param [id]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer deleteById(Integer id) {
+        return fileStoreMapper.deleteById(id);
+    }
+
 }

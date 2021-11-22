@@ -2,18 +2,159 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moyu.moyunetdisk.mapper.MyFileMapper">
 
-    <resultMap type="com.moyu.moyunetdisk.entity.MyFile" id="MyFileMap">
-        <result property="myFileId" column="my_file_id" jdbcType="INTEGER"/>
+    <resultMap type="com.moyu.moyunetdisk.entity.MyFile" id="BaseResultMap">
+        <id property="myFileId" column="my_file_id" jdbcType="INTEGER"/>
         <result property="myFileName" column="my_file_name" jdbcType="VARCHAR"/>
         <result property="fileStoreId" column="file_store_id" jdbcType="INTEGER"/>
         <result property="myFilePath" column="my_file_path" jdbcType="VARCHAR"/>
         <result property="downloadTime" column="download_time" jdbcType="INTEGER"/>
         <result property="uploadTime" column="upload_time" jdbcType="TIMESTAMP"/>
         <result property="parentFolderId" column="parent_folder_id" jdbcType="INTEGER"/>
-        <result property="size" column="size" jdbcType="INTEGER"/>
-        <result property="type" column="type" jdbcType="INTEGER"/>
-        <result property="postfix" column="postfix" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <!--表中所有属性-->
+    <sql id="Base_Column_List">
+        my_file_id, my_file_name, file_store_id, my_file_path, download_time, upload_time,
+    parent_folder_id,size,type,postfix
+    </sql>
+    <!--添加属性sql-->
+    <sql id="Base_Insert_Key_List">
+        <if test="myFileName != null">
+            my_file_name,
+        </if>
+        <if test="fileStoreId != null">
+            file_store_id,
+        </if>
+        <if test="myFilePath != null">
+            my_file_path,
+        </if>
+        <if test="downloadTime != null">
+            download_time,
+        </if>
+        <if test="uploadTime != null">
+            upload_time,
+        </if>
+        <if test="parentFolderId != null">
+            parent_folder_id,
+        </if>
+        <if test="size != null">
+            size,
+        </if>
+        <if test="type != null">
+            type,
+        </if>
+        <if test="postfix != null">
+            postfix,
+        </if>
+    </sql>
+    <!--添加值sql-->
+    <sql id="Base_Insert_Value_List">
+        <if test="myFileName != null">
+            #{myFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="fileStoreId != null">
+            #{fileStoreId,jdbcType=INTEGER},
+        </if>
+        <if test="myFilePath != null">
+            #{myFilePath,jdbcType=VARCHAR},
+        </if>
+        <if test="downloadTime != null">
+            #{downloadTime,jdbcType=INTEGER},
+        </if>
+        <if test="uploadTime != null">
+            #{uploadTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="parentFolderId != null">
+            #{parentFolderId,jdbcType=INTEGER},
+        </if>
+        <if test="size != null">
+            #{size},
+        </if>
+        <if test="type != null">
+            #{type},
+        </if>
+        <if test="postfix != null">
+            #{postfix},
+        </if>
+    </sql>
+    <!--修改sql-->
+    <sql id="Base_Update_List">
+        <if test="myFileName != null">
+            my_file_name = #{myFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="downloadTime != null">
+            download_time = #{downloadTime,jdbcType=INTEGER},
+        </if>
+        <if test="uploadTime != null">
+            upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="parentFolderId != null">
+            parent_folder_id = #{parentFolderId,jdbcType=INTEGER},
+        </if>
+        <if test="size != null">
+            size = #{size},
+        </if>
+        <if test="type != null">
+            type = #{type},
+        </if>
+    </sql>
+
+    <insert id="addFileByFileStoreId" keyColumn="my_file_id" keyProperty="myFileId" parameterType="com.moyu.moyunetdisk.entity.MyFile" useGeneratedKeys="true">
+        insert into t_my_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Insert_Key_List"></include>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Base_Insert_Value_List"></include>
+        </trim>
+    </insert>
+
+    <update id="updateFileByFileId" parameterType="com.moyu.moyunetdisk.entity.MyFile">
+        update my_file
+        <set>
+            <include refid="Base_Update_List"></include>
+        </set>
+        where my_file_id = #{myFileId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByFileId" parameterType="java.lang.Integer">
+        delete from t_my_file
+        where my_file_id = #{myFileId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByParentFolderId" parameterType="java.lang.Integer">
+        delete from t_my_file
+        where parent_folder_id = #{id}
+    </delete>
+
+    <select id="getFileByFileId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_my_file
+        where my_file_id = #{myFileId,jdbcType=INTEGER}
+    </select>
+
+    <select id="getRootFilesByFileStoreId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_my_file
+        where file_store_id = #{fileStoreId} and parent_folder_id = 0;
+    </select>
+
+    <select id="getFilesByParentFolderId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_my_file
+        where parent_folder_id = #{parentFolderId};
+    </select>
+
+    <select id="getFilesByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_my_file
+        where file_store_id = #{storeId} and type = #{type};
+    </select>
+
 
     <select id="getCountStatistics" resultType="com.moyu.moyunetdisk.entity.FileStoreStatistics">
         select sum(type = 1) doc,sum(type = 2) image,sum(type = 3) video,

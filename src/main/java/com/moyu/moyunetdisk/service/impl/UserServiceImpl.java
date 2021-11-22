@@ -5,6 +5,7 @@ import com.moyu.moyunetdisk.def.ExceptionCodeEnum;
 import com.moyu.moyunetdisk.def.NetDiskException;
 import com.moyu.moyunetdisk.def.ValidatorUtil;
 import com.moyu.moyunetdisk.entity.User;
+import com.moyu.moyunetdisk.entity.UserToShow;
 import com.moyu.moyunetdisk.mapper.FileFolderMapper;
 import com.moyu.moyunetdisk.mapper.FileStoreMapper;
 import com.moyu.moyunetdisk.mapper.MyFileMapper;
@@ -65,5 +66,64 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User getUserByOpenId(String openId) {
         return userMapper.selectOne(Wrappers.lambdaQuery(User.class).eq(User::getOpenId, openId));
+    }
+
+    @Override
+    public boolean insert(User user) {
+        if(userMapper.insert(user) == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteById(Integer userId) {
+        if(userMapper.deleteById(userId) == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public User queryById(Integer userId) {
+        return userMapper.queryById(userId);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userMapper.getUserByEmail(email);
+    }
+
+    @Override
+    public User queryByEmailAndPwd(String email, String password) {
+        return userMapper.queryByEmailAndPwd(email,password);
+    }
+
+    @Override
+    public List<User> queryAll() {
+        return userMapper.queryAll();
+    }
+
+    @Override
+    public List<User> queryAll(User user) {
+        return userMapper.queryAll(user);
+    }
+
+    @Override
+    public boolean update(User user) {
+        if(userMapper.update(user) == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<UserToShow> getUsers() {
+        return userMapper.getUsers();
+    }
+
+    @Override
+    public Integer getUsersCount() {
+        return userMapper.getUsersCount();
     }
 }

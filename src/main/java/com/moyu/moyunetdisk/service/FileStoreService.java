@@ -31,4 +31,14 @@ public interface FileStoreService extends IService<FileStore> {
      * @return com.molihub.entity.FileStore
      **/
     public FileStore getFileStoreById(Integer fileStoreId);
+
+    FileStore getFileStoreByUserId(Integer userId);
+
+    Integer addSize(Integer id, Integer size);
+
+    Integer subSize(Integer id, Integer size);
+
+    Integer updatePermission(Integer id, Integer permission, Integer size);
+
+    Integer deleteById(Integer id);
 }

@@ -23,4 +23,20 @@ public interface MyFileService extends IService<MyFile> {
      * @return com.molihub.entity.FileStoreStatistics
      **/
     FileStoreStatistics getCountStatistics(Integer id);
+
+    Integer deleteByFileId(Integer myFileId);
+
+    Integer deleteByParentFolderId(Integer id);
+
+    Integer addFileByFileStoreId(MyFile myFile);
+
+    Integer updateFile(MyFile myFile);
+
+    List<MyFile> getRootFilesByFileStoreId(Integer fileStoreId);
+
+    List<MyFile> getFilesByParentFolderId(Integer parentFolderId);
+
+    List<MyFile> getFilesByType(Integer storeId, Integer type);
+
+    MyFile getFileByFileId(Integer myFileId);
 }
