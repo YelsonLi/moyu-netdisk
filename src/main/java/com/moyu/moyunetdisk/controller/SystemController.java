@@ -145,4 +145,97 @@ public class SystemController extends BaseController {
         log.info("网盘页面域中的数据:" + map);
         return "u-admin/upload";
     }
+
+    /**
+     * @Description 前往所有文档页面
+     * @Author xw
+     * @Date 10:26 2020/2/26
+     * @Param [map]
+     * @return java.lang.String
+     **/
+    @GetMapping("/doc-files")
+    public String toDocFilePage( Map<String, Object> map) {
+        List<MyFile> files = myFileService.getFilesByType(loginUser.getFileStoreId(),1);
+        //获得统计信息
+        FileStoreStatistics statistics = myFileService.getCountStatistics(loginUser.getFileStoreId());
+        map.put("statistics", statistics);
+        map.put("files", files);
+        map.put("permission", fileStoreService.getFileStoreByUserId(loginUser.getUserId()).getPermission());
+        return "u-admin/doc-files";
+    }
+
+    /**
+     * @Description 前往所有图像页面
+     * @Author xw
+     * @Date 10:26 2020/2/26
+     * @Param [map]
+     * @return java.lang.String
+     **/
+    @GetMapping("/image-files")
+    public String toImageFilePage( Map<String, Object> map) {
+        List<MyFile> files = myFileService.getFilesByType(loginUser.getFileStoreId(),2);
+        //获得统计信息
+        FileStoreStatistics statistics = myFileService.getCountStatistics(loginUser.getFileStoreId());
+        map.put("statistics", statistics);
+        map.put("files", files);
+        map.put("permission", fileStoreService.getFileStoreByUserId(loginUser.getUserId()).getPermission());
+        return "u-admin/image-files";
+    }
+
+    /**
+     * @Description 前往所有视频页面
+     * @Author xw
+     * @Date 10:26 2020/2/26
+     * @Param [map]
+     * @return java.lang.String
+     **/
+    @GetMapping("/video-files")
+    public String toVideoFilePage( Map<String, Object> map) {
+        List<MyFile> files = myFileService.getFilesByType(loginUser.getFileStoreId(),3);
+        //获得统计信息
+        FileStoreStatistics statistics = myFileService.getCountStatistics(loginUser.getFileStoreId());
+        map.put("statistics", statistics);
+        map.put("files", files);
+        map.put("permission", fileStoreService.getFileStoreByUserId(loginUser.getUserId()).getPermission());
+        return "u-admin/video-files";
+    }
+
+    /**
+     * @Description 前往所有音频页面
+     * @Author xw
+     * @Date 10:26 2020/2/26
+     * @Param [map]
+     * @return java.lang.String
+     **/
+    @GetMapping("/music-files")
+    public String toMusicFilePage( Map<String, Object> map) {
+        List<MyFile> files = myFileService.getFilesByType(loginUser.getFileStoreId(),4);
+        //获得统计信息
+        FileStoreStatistics statistics = myFileService.getCountStatistics(loginUser.getFileStoreId());
+        map.put("statistics", statistics);
+        map.put("files", files);
+        map.put("permission", fileStoreService.getFileStoreByUserId(loginUser.getUserId()).getPermission());
+        return "u-admin/music-files";
+    }
+
+    /**
+     * @Description 前往其他文件页面
+     * @Author xw
+     * @Date 10:26 2020/2/26
+     * @Param [map]
+     * @return java.lang.String
+     **/
+    @GetMapping("/other-files")
+    public String toOtherFilePage( Map<String, Object> map) {
+        List<MyFile> files = myFileService.getFilesByType(loginUser.getFileStoreId(),5);
+        //获得统计信息
+        FileStoreStatistics statistics = myFileService.getCountStatistics(loginUser.getFileStoreId());
+        map.put("statistics", statistics);
+        map.put("files", files);
+        map.put("permission", fileStoreService.getFileStoreByUserId(loginUser.getUserId()).getPermission());
+        return "u-admin/other-files";
+    }
+
+
+
 }
